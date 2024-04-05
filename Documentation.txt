@@ -1,0 +1,70 @@
+Documentation: Custom RTGym Interface for TrackMania
+Overview
+This documentation outlines the implementation of a custom Real-Time Gym (RTGym) interface for a dummy RC drone simulation in TrackMania. The setup includes creating a custom environment, defining observation and action spaces, and configuring the environment for real-time interaction.
+
+Dependencies
+rtgym
+gymnasium
+numpy
+cv2 (OpenCV)
+threading
+Custom Gym Interface: DummyRCDroneInterface
+Inherits from RealTimeGymInterface. Represents the environment for the dummy RC drone.
+
+Methods
+__init__(self)
+
+Initializes the interface.
+Sets up a dummy RC drone, target coordinates, and a rendering thread.
+_rendering_thread(self)
+
+Runs in a separate thread.
+Continuously renders the environment's state.
+get_observation_space(self)
+
+Defines the space for observations (position and target coordinates).
+get_action_space(self)
+
+Defines the action space for the drone (velocity in x and y).
+get_default_action(self)
+
+Returns a default action (zero velocity).
+send_control(self, control)
+
+Sends control commands (velocity) to the RC drone.
+reset(self, seed=None, options=None)
+
+Resets the environment to its initial state.
+Randomizes target coordinates.
+get_obs_rew_terminated_info(self)
+
+Returns the current observation, reward, termination status, and additional info.
+Reward calculated based on distance to the target.
+wait(self)
+
+An empty method, can be used for synchronization in real-time environments.
+render(self)
+
+Visualizes the environment's state using OpenCV.
+RTGym Configuration Dictionary: my_config
+A dictionary to configure the RTGym environment.
+
+Configuration Parameters
+interface: The custom gym interface to use (here, DummyRCDroneInterface).
+time_step_duration: Duration of each time step in the simulation.
+start_obs_capture: Time to start capturing observations.
+time_step_timeout_factor: Timeout factor for time steps.
+ep_max_length: Maximum length of an episode.
+act_buf_len: Length of the action buffer.
+reset_act_buf: Whether to reset the action buffer at the start of each episode.
+benchmark: If benchmarking is enabled.
+benchmark_polyak: Polyak averaging factor for benchmarking.
+Using the Interface
+Instantiate DummyRCDroneInterface and pass it to the RTGym environment.
+The environment can then be used with reinforcement learning algorithms to train agents.
+Agents interact with the environment by sending actions and receiving observations, rewards, and termination signals.
+Rendering and Visualization
+The environment state is visualized in real-time using OpenCV.
+This feature is useful for monitoring and debugging.
+Note
+This documentation provides a basic overview. For more detailed information and specific use cases, refer to the code comments and the RTGym documentation.
