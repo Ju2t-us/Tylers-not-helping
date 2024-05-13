@@ -1,0 +1,9 @@
+-model-base
+-model-noPool
+-model-2x2Filter
+-model-2x2Filter NoPool
+-model-4x4Filter
+-model-4x4Filter NoPool
+
+I'll run 6 models, the 'base' with 3x3 filter, and ones with 2x2 and 4x4 filters. 
+The origonal code also has 'pooling' and 'dropout' layers, and so I'll run each of the filter sizes without the other layers.
